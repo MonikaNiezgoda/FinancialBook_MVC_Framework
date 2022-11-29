@@ -1,0 +1,85 @@
+
+body
+{
+	font-family: 'Montserrat', sans-serif;
+    background-image: url("img/tło.png") !important;
+	background-size: auto;
+	color: black;
+    font-size: 15px;
+}
+.h5
+{
+	font-weight:500 !important;
+}
+.navbar
+{
+	background-color: #D6983A !important;
+}
+
+input[type=text]:focus ,
+input[type=password]:focus,
+input[type=email]:focus,
+input[type=date]:focus,
+input[type=number]:focus
+{
+	-webkit-box-shadow: 0px 0px 10px 2px rgba(204,204,204,0.9);
+	-moz-box-shadow: 0px 0px 10px 2px rgba(204,204,204,0.9);
+	box-shadow: 0px 0px 10px 2px rgba(204,204,204,0.9);
+	border: 2px solid  #D6983A ;
+}
+
+textarea:focus
+{
+	-webkit-box-shadow: 0px 0px 10px 2px rgba(204,204,204,0.9) !important;
+	-moz-box-shadow: 0px 0px 10px 2px rgba(204,204,204,0.9) !important;
+	box-shadow: 0px 0px 10px 2px rgba(204,204,204,0.9) !important;
+	border: 2px solid  #D6983A !important;
+}
+
+select:focus
+{
+	-webkit-box-shadow: 0px 0px 10px 2px rgba(204,204,204,0.9) !important;
+	-moz-box-shadow: 0px 0px 10px 2px rgba(204,204,204,0.9) !important;
+	box-shadow: 0px 0px 10px 2px rgba(204,204,204,0.9) !important;
+	border: 2px solid  #D6983A !important;
+}
+
+.btn-md
+ {
+	    border-width: 0;
+	    outline: none;
+	    border-radius: 2px;
+	    box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
+	    cursor: pointer;
+	}
+	
+	.table
+	{
+	background-color:#F7EFC2;
+	}
+	
+	td
+	{
+		width: 50%;
+	}
+	
+	.dropdown-item:hover
+{
+	background-color: #F7EFC2 !important;
+	
+}
+
+.error
+{
+	color: red !important;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.info
+{
+	color: FCB50F !important;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	font-weight: bold !important;
+}
