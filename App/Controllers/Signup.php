@@ -34,7 +34,7 @@ class Signup extends \Core\Controller
 
         if ($user->save()) {
 
-            $this->redirect('/signup/success');
+            View::renderTemplate('Home/index.html');
 
         } else {
 
