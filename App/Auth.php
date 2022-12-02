@@ -17,15 +17,15 @@ class Auth
      *
      * @return void
      */
-    public static function login($user, $remember_me)
+    public static function login($user/*, $remember_me*/)
     {
-        session_regenerate_id(true);
+        //session_regenerate_id(true);
 
         $_SESSION['user_id'] = $user->id;
 
-        if($remember_me) {
+        /*if($remember_me) {
             $user->rememberLogin();
-        }
+        }*/
     }
 
     /**
