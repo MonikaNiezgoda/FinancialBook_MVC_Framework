@@ -9,7 +9,7 @@
 {% endblock %}
 
 
-
+{% block body %}
 <header>
     <h1 class="display-5 h-5 text-center"> Twój budżet</h1>
     
@@ -58,13 +58,14 @@
                           </li>
     </ul>
           <span class="navbar-text">
-             {% if current_user %}
+            {% if current_user %}
              Witaj {{current_user.name}}.!
+             {% endif %}
           </span>
   </div>
 </nav>
-{% block body %}
 </header>
+
     <main>
         <div class="container">
          <div class="row mt-2">
@@ -78,7 +79,5 @@
                 </div>
             </div>
          </div>
-
     </main>
-
 {% endblock %}
