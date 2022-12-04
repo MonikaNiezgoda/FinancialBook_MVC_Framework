@@ -42,7 +42,7 @@ class Login extends \Core\Controller
 
             Flash::addMessage('Login successful');
 
-            View::renderTemplate('Menu/main.html');
+            $this->redirect('/menu/main');
 
         } else {
 
