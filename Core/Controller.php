@@ -91,9 +91,9 @@ abstract class Controller
 
             Flash::addMessage('Please login to access that page', Flash::INFO);
 
-            Auth::rememberRequestedPage();
+           // Auth::rememberRequestedPage();
 
-            $this->redirect('/login');
+            $this->redirect('/login/new');
         }
     }
 }

@@ -12,6 +12,4 @@ class Menu extends \Core\Controller
     {
         View::renderTemplate('Menu/main.html');
     }
-
-
 }
