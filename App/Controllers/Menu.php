@@ -10,6 +10,7 @@ class Menu extends \Core\Controller
     public function mainAction()
 
     {
+        $this->requireLogin();
         View::renderTemplate('Menu/main.html');
     }
 }

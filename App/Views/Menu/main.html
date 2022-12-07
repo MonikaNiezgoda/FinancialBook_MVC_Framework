@@ -58,8 +58,8 @@
                           </li>
     </ul>
           <span class="navbar-text">
-          {% if session.user_id %}
-          User with ID {{ session.user_id }}
+          {% if user.is_logged_in %}
+          User with ID {{ user.user_id }}
           {% else %}
           Witaj! 
           {% endif %}

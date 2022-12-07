@@ -38,6 +38,7 @@ class Login extends \Core\Controller
         if ($user) {
 
             Auth::login($user);
+            Auth::isLoggedIn();
 
             $this -> redirect('/Menu/main');
 

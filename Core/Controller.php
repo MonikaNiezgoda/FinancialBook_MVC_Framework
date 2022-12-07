@@ -87,13 +87,13 @@ abstract class Controller
      */
     public function requireLogin()
     {
-        if (! Auth::getUser()) {
+        if (! Auth::isLoggedIn()) {
 
             Flash::addMessage('Please login to access that page', Flash::INFO);
 
-           // Auth::rememberRequestedPage();
+           Auth::rememberRequestedPage();
 
-            $this->redirect('/login/new');
+            $this->redirect('/login');
         }
     }
 }
