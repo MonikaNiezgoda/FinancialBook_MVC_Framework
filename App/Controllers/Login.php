@@ -38,6 +38,7 @@ class Login extends \Core\Controller
         if ($user) {
 
             Auth::login($user);
+            Flash::addMessage('Login successful');
             $this -> redirect('/Menu/main');
 
         } else {
