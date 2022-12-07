@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use \Core\View;
 use \App\Models\User;
+use \App\Flash;
 
 /**
  * Signup controller
@@ -34,7 +35,7 @@ class Signup extends \Core\Controller
 
         if ($user->save()) {
 
-            View::renderTemplate('Home/index.html');
+            $this->redirect('/signup/success');;
 
         } else {
 
@@ -52,6 +53,7 @@ class Signup extends \Core\Controller
      */
     public function successAction()
     {
-        View::renderTemplate('Signup/success.html');
+        Flash::addMessage('Rejestracja zakończyła się powodzeniem', Flash::WARNING);
+        View::renderTemplate('Home/index.html');
     }
 }
