@@ -9,8 +9,7 @@ class Menu extends Authenticated
 {
     public function mainAction()
 
-    {
-        
+    { 
         View::renderTemplate('Menu/main.html');
     }
 }

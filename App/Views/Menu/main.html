@@ -58,10 +58,10 @@
                           </li>
     </ul>
           <span class="navbar-text">
-          {% if user.is_logged_in %}
-          User with ID {{ user.user_id }}
+          {% if current_user %}
+          Witaj {{ current_user.username }} !
           {% else %}
-          Witaj! 
+          Nie
           {% endif %}
           </span>
   </div>
