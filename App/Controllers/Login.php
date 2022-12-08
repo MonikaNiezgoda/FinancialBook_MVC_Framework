@@ -38,7 +38,7 @@ class Login extends \Core\Controller
         if ($user) {
 
             Auth::login($user);
-            Flash::addMessage('Logowanie się powiodło');
+            Flash::addMessage('Logowanie się powiodło.');
             $this -> redirect('/Menu/main');
 
         } else {
@@ -62,7 +62,7 @@ class Login extends \Core\Controller
 
     public function showLogoutMessageAction()
     {
-        Flash::addMessage('Logout successful.');
+        Flash::addMessage('Wylogowanie się powiodło.');
 
         $this->redirect('/');
     }
