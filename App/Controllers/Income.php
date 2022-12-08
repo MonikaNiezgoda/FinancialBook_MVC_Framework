@@ -7,9 +7,14 @@ use \App\Auth;
 
 class Income extends Authenticated
 {
-    public function addAction()
-
+    public function createAction()
     { 
-        View::renderTemplate('Income/add.html');
+        View::renderTemplate('Income/create.html');
+    }
+
+    public function addAction()
+    {
+        Flash::addMessage('Dodanie przychodu się powiodło.');
+        $this-> redirect('/income/create');
     }
 }

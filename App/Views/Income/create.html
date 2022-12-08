@@ -69,7 +69,7 @@
     <div class="row justify-content-center mb-2 mt-2">
     <h3> Dodawanie przychodu</h3>
     </div>
-    <form method="post" action="dodaj_przychod.php">
+    <form method="post" action="/income/add">
     <div class="row justify-content-center">
       <div class=" col-8  col-md-6">
         <div class="input-group mb-3">
@@ -114,19 +114,19 @@
   <div class="row justify-content-center">
 
       <div class="col-4  col-md-3">
-       <button type="button" class="btn btn-success btn-md btn-block" data-toggle="modal" data-target="#modal">
-          Dodaj
+       <input type="sumbit" value="Dodaj" class="btn btn-success btn-md btn-block" data-toggle="modal" data-target="#modal">
+          
         </button>
       </div>
 
       
       <div class="col-4  col-md-3">
-        <a  class="btn btn-secondary btn-md btn-block" href="menu_glowne.php" role="button">Anuluj</a>
+        <a  class="btn btn-secondary btn-md btn-block" href="/menu/main" role="button">Anuluj</a>
       </div>
   </div>
   
   
-  <!-- Modal -->
+  <!-- Modal 
   <div class="modal fade" id="modal" tabindex="-1" data-backdrop="static" data-keyboard="false"aria-labelledby="modalLabel" aria-hidden="true">
     <div class="modal-dialog">
     <div class="modal-content">
@@ -146,6 +146,8 @@
     </div>
     </div>
   </div>
+
+  -->
   </form>
 
 </div>
