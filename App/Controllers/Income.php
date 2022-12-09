@@ -9,6 +9,8 @@ class Income extends Authenticated
 {
     public function createAction()
     { 
+        $incomes = Income::findAllIncomesCat($id);
+
         View::renderTemplate('Income/create.html');
     }
 

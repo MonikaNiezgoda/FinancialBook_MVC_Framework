@@ -140,7 +140,6 @@ class User extends \Core\Model
 
         return $stmt->fetch();
     }
-
     public function rememberLogin()
     {
         $token = new Token();
