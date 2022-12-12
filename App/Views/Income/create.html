@@ -93,11 +93,9 @@
         <div class="input-group mb-3">
               <select class="form-control"  id="kategoria" name="kategoria" required>
 
-                <?php
-                  foreach($incomesCat as $incomesCategory){
-                  echo "<option value={$incomesCategory['id']}>{$incomesCategory['name']} </option>";
-                  }
-                ?>
+                {% for incomes in incomes_categories %}
+                <option value="{{incomes.id}}"> {{ incomes.name }} </option>
+                {% endfor %}
         
               </select> 
         </div>

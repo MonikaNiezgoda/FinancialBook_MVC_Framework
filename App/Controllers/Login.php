@@ -39,6 +39,7 @@ class Login extends \Core\Controller
 
             Auth::login($user);
             Flash::addMessage('Logowanie się powiodło.');
+
             $this -> redirect('/Menu/main');
 
         } else {

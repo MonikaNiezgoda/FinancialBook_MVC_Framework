@@ -41,6 +41,7 @@ class Signup extends \Core\Controller
             $users=$user->findByEmail($_POST['email']);
 
             $incomesCat->addDefaultIncomesCat($users->id);
+            $incomesCat->findAllIncomesCat($users->id);
 
             $this->redirect('/signup/success');
 
