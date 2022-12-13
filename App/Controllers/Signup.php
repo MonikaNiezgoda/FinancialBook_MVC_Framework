@@ -5,7 +5,8 @@ namespace App\Controllers;
 use \Core\View;
 use \App\Models\User;
 use \App\Flash;
-use \App\Models\Income;
+use \App\Models\UserIncomes;
+use \App\Models\UserExpenses;
 
 /**
  * Signup controller
@@ -36,11 +37,15 @@ class Signup extends \Core\Controller
 
         if ($user->save()) {
 
-            $incomesCat = new Income();
+            $incomesCat = new UserIncomes();
+
+            $expensesCat = new UserExpenses();
 
             $users=$user->findByEmail($_POST['email']);
 
             $incomesCat->addDefaultIncomesCat($users->id);
+
+            $expensesCat->addDefaultExpensesCat($users->id);
 
             $this->redirect('/signup/success');
 
