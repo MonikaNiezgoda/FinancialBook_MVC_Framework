@@ -37,12 +37,13 @@ class UserExpenses extends \Core\Model
     public function save($userId)
     {
         $category=$_POST['kategoria'];
+        $paymentMethod="1";
 		$amount = $_POST["kwota"];
 		$date = $_POST["data"];
 		$comment =$_POST["komentarz"];
 
 		$db = static::getDB();
-		$addExpense = $db ->exec("INSERT INTO expenses VALUES (NULL , '$userId', $category, $amount, $date, $comment )");
+		$addExpense = $db ->exec("INSERT INTO expenses VALUES (NULL , '$userId', '$category', '$paymentMethod', '$amount', '$date', '$comment' )");
     }
 
 
