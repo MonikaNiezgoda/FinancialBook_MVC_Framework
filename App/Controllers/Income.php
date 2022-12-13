@@ -25,7 +25,7 @@ class Income extends Authenticated
         $income = new UserIncomes($_POST);
         $income->save($user->id);
 
-        Flash::addMessage('Dodanie przychodu się powiodło.');
+        Flash::addMessage('Przychód został dodany.');
         $this-> redirect('/income/create');
     }
 }

@@ -42,7 +42,7 @@ class UserIncomes extends \Core\Model
 		$comment =$_POST["komentarz"];
 
 		$db = static::getDB();
-		$dodajPrzychod = $db ->exec("INSERT INTO incomes VALUES (NULL , '$userId', '$category', '$amount', '$date', '$comment' )");
+		$dodajPrzychod = $db ->exec("INSERT INTO incomes VALUES (NULL , '$userId', $category, $amount, $date, $comment )");
     }
 
 
