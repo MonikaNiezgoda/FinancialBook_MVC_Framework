@@ -34,5 +34,16 @@ class UserIncomes extends \Core\Model
 
     }
 
+    public function save($userId)
+    {
+        $category=$_POST['kategoria'];
+		$amount = $_POST["kwota"];
+		$date = $_POST["data"];
+		$comment =$_POST["komentarz"];
+
+		$db = static::getDB();
+		$dodajPrzychod = $db ->exec("INSERT INTO incomes VALUES (NULL , '$userId', '$category', '$amount', '$date', '$comment' )");
+    }
+
 
 }
