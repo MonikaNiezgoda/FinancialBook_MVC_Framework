@@ -45,5 +45,28 @@ class UserIncomes extends \Core\Model
 		$dodajPrzychod = $db ->exec("INSERT INTO incomes VALUES (NULL , '$userId', $category, $amount, $date, $comment )");
     }
 
+    public function getIncomes($userId)
+    {
+        if(isset($_POST['currentMonth']))
+        {
+            $dataod=date('Y-m-d ', mktime(0,0,0,date('m'),1,date('Y')));
+		    $datado=date('Y-m-d', mktime(23,59,59,date('m')+1,0,date('Y')));
+        }
+            $sql = "SELECT sum(amount) as sum, name FROM incomes JOIN incomes_category_assigned_to_users as category ON incomes.income_category_assigned_to_user_id = category.id  
+            WHERE incomes.user_id='$userId'
+            GROUP BY name";
+            $db = static::getDB();
+			$userIncomes = $db->query($sql);
+			return $userIncomes -> fetchAll();
+    }
+
+    public function sumIncomes($allIncomes)
+    {
+        $sumIncomes=0;
+        foreach($allIncomes as $incomes){
+        $sumIncomes+=$expenses['sum'];
+        }
+        return number_format($sumIncomes,2,'.','');
+    }
 
 }

@@ -46,5 +46,29 @@ class UserExpenses extends \Core\Model
 		$addExpense = $db ->exec("INSERT INTO expenses VALUES (NULL , '$userId', '$category', '$paymentMethod', '$amount', '$date', '$comment' )");
     }
 
+    public function getExpenses($userId)
+    {
+        if(isset($_POST['currentMonth']))
+        {
+            $dataod=date('Y-m-d ', mktime(0,0,0,date('m'),1,date('Y')));
+		    $datado=date('Y-m-d', mktime(23,59,59,date('m')+1,0,date('Y')));
+        }
+        $sql = "SELECT sum(amount) as sum, name FROM expenses JOIN expenses_category_assigned_to_users as category ON expenses.expense_category_assigned_to_user_id = category.id  
+			WHERE expenses.user_id='$userId' AND date_of_expense BETWEEN '$dataod' AND '$datado'
+			GROUP BY name";
+            $db = static::getDB();
+			$userExpenses = $db->query($sql);
+			return $userExpenses -> fetchAll();
+    }
+
+    public function sumExpenses($allExpenses)
+    {
+        $sumExpenses=0;
+        foreach($allExpenses as $expenses){
+        $sumExpenses+=$expenses['sum'];
+        }
+        return number_format($sumExpenses,2,'.','');
+    }
+
 
 }

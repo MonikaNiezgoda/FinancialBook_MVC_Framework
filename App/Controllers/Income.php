@@ -13,6 +13,7 @@ class Income extends Authenticated
      
     public function createAction()
     {
+        $this->requireLogin();
         $user = Auth::getUser();
         View::renderTemplate('Income/create.html',[
             'incomes_categories'=>UserIncomes::findAllIncomesCat($user->id)

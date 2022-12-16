@@ -81,10 +81,10 @@
             <form method="post" action="/balance/create">
               <input class="dropdown-item btn btn-warning" type="submit"   name="currentMonth" value="Bieżący miesiąc">
              </form>
-             <form method="post" action="poprzedni_miesiac.php">
+             <form method="post" action="/balance/create">
               <input class="dropdown-item btn btn-warning" type="submit"   name="previousMonth" value="Poprzedni miesiąc">
             </form>
-            <form method="post" action="biezacy_rok.php">
+            <form method="post" action="/balance/create">
               <input class="dropdown-item btn btn-warning" type="submit"   name="currentYear" value="Bieżący rok">
             </form>
         
@@ -94,17 +94,50 @@
     </div>
     
   </div>
-    <div class="row collapse  justify-content-center mb-2 mt-3" id="collapse">
-      <div class="card card-body col-md-4">
-        <form method="post" action="wybrane_daty.php">
-        Od dnia:
-        <input type="date" class="form-control input-sm  mb-2"  id="data"  min="1990-01-01" name="dataOd" required>
-        Do dnia:
-        <input type="date" class="form-control input-sm  mb-2"  id="data"  min="1990-01-01" name="dataDo" required>
-        <input type="submit"  class="btn btn-success btn-md" value="Zatwierdź">
-        </form>
-      </div>
+  <div class="row">
+    <div class="col-md-6 my-2">
+      <table class="table table-bordered table-hover">
+        <thead>
+          <tr>
+          <th colspan="2" class="text-center"> Przychody z bieżącego miesiąca</th>
+          </tr>
+          <tr>
+            <th scope="col">Kategoria</th>
+            <th scope="col">Suma</th>
+          </tr>
+          <tbody>
+            {% for incomes in incomes %}
+            <tr><td>{{incomes.name}} </td>  <td>{{ incomes.sum }}</td></tr>
+            {% endfor %}
+            <tr><td>RAZEM</td>  <td> {{ sum_incomes }}</td></tr>
+          </tbody>
+        </thead>
+      </table>	
+    </div>
+  
+  
+  <div class="col-md-6 my-2">
+    <table class="table table-bordered table-hover">
+      <thead>
+        <tr>
+        <th colspan="2" class="text-center"> Wydatki z bieżącego miesiąca</th>
+        </tr>
+        <tr>
+          <th scope="col">Kategoria</th>
+          <th scope="col">Suma</th>
+        </tr>
+        <tbody>
+        {% set sumExpenses=0 %}
+            {% for expenses in expenses %}
+            <tr><td>{{expenses.name}} </td>  <td>{{ expenses.sum }}</td></tr>
+            {% endfor %}
+            <tr><td>RAZEM</td>  <td> {{ sum_expenses }}</td></tr>
+        </tbody>
+      </thead>
+    </table>
   </div>
+</div>
+
 </div>	
 </main>
 {% endblock %}
