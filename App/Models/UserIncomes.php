@@ -52,6 +52,11 @@ class UserIncomes extends \Core\Model
             $dataod=date('Y-m-d ', mktime(0,0,0,date('m'),1,date('Y')));
 		    $datado=date('Y-m-d', mktime(23,59,59,date('m')+1,0,date('Y')));
         }
+        if(isset($_POST['previousMonth']))
+        {
+            $dataod=  date('Y-m-d ', mktime(0,0,0,date('m')-1,1,date('Y')));
+		    $datado= date('Y-m-d', mktime(23,59,59,date('m'),0,date('Y')));
+        }
             $sql = "SELECT sum(amount) as sum, name FROM incomes JOIN incomes_category_assigned_to_users as category ON incomes.income_category_assigned_to_user_id = category.id  
             WHERE incomes.user_id='$userId'
             GROUP BY name";
