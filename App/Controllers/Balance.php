@@ -8,7 +8,7 @@ use \App\Auth;
 use \App\Models\UserIncomes;
 use \App\Models\UserExpenses;
 
-class Balance extends \Core\Controller
+class Balance extends Authenticated
 {
     public function newAction()
     {
@@ -20,9 +20,8 @@ class Balance extends \Core\Controller
     {
         $this->requireLogin();
 
-        $incomes = new UserIncomes($_POST);
-
         $expenses = new UserExpenses($_POST);
+        $incomes = new UserIncomes($_POST);
 
         $user = Auth::getUser();
 
@@ -33,10 +32,22 @@ class Balance extends \Core\Controller
                 'expenses'=>$allExpenses,
                 'sum_expenses'=>$expenses->sumExpenses($allExpenses),
                 'incomes'=>$allIncomes,
-                'sum_incomes'=>$incomes->sumIncomes($allIncomes)
+                'sum_incomes'=>$incomes->sumIncomes($allIncomes),
+                'balance'=>$this->checkDate()
 
             ]);
         
+    }
+
+    public function checkDate()
+    {
+        if(isset($_POST['currentMonth']))
+        return "z bieżącego miesiąca";
+        if(isset($_POST['previousMonth']))
+        return "z poprzedniego miesiąca";
+        if(isset($_POST['currentYear']))
+        return "z bieżącego roku";
+
     }
 
 }

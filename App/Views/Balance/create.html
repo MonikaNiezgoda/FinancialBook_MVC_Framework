@@ -99,7 +99,7 @@
       <table class="table table-bordered table-hover">
         <thead>
           <tr>
-          <th colspan="2" class="text-center"> Przychody z bieżącego miesiąca</th>
+          <th colspan="2" class="text-center"> Przychody {{ balance }}</th>
           </tr>
           <tr>
             <th scope="col">Kategoria</th>
@@ -120,14 +120,14 @@
     <table class="table table-bordered table-hover">
       <thead>
         <tr>
-        <th colspan="2" class="text-center"> Wydatki z bieżącego miesiąca</th>
+        <th colspan="2" class="text-center"> Wydatki {{ balance }}</th>
         </tr>
         <tr>
           <th scope="col">Kategoria</th>
           <th scope="col">Suma</th>
         </tr>
         <tbody>
-        {% set sumExpenses=0 %}
+        
             {% for expenses in expenses %}
             <tr><td>{{expenses.name}} </td>  <td>{{ expenses.sum }}</td></tr>
             {% endfor %}
