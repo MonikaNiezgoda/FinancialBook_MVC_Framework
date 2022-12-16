@@ -58,6 +58,12 @@ class UserExpenses extends \Core\Model
             $dataod=  date('Y-m-d ', mktime(0,0,0,date('m')-1,1,date('Y')));
 		    $datado= date('Y-m-d', mktime(23,59,59,date('m'),0,date('Y')));
         }
+        if(isset($_POST['currentYear']))
+		{
+		//ustawienie pierwszego i ostatniego dnia bieżącego roku
+		$dataod=  date('Y-m-d ', mktime(0,0,0,1,1,date('Y')));
+		$datado= date('Y-m-d', mktime(23,59,59,13,0,date('Y')));
+        }
         $sql = "SELECT sum(amount) as sum, name FROM expenses JOIN expenses_category_assigned_to_users as category ON expenses.expense_category_assigned_to_user_id = category.id  
 			WHERE expenses.user_id='$userId' AND date_of_expense BETWEEN '$dataod' AND '$datado'
 			GROUP BY name";
