@@ -47,7 +47,12 @@ class Balance extends Authenticated
         return "z poprzedniego miesiąca";
         if(isset($_POST['currentYear']))
         return "z bieżącego roku";
-
+        if (isset($_POST['dataOd']))
+        {
+            $dataOd= $_POST['dataOd'];
+		    $dataDo= $_POST['dataDo'];
+            return "od $dataOd do $dataDo";
+        }
     }
 
 }
