@@ -137,6 +137,31 @@
     </table>
   </div>
 </div>
+<div class="d-flex justify-content-center row" >
+  <a  role="button" class="btn btn-success col-6 text-center mt-2" data-toggle="collapse" href="#piecharts" 
+  {% if sum_expenses>sum_incomes %} href="#collapseAlert" {% else %} href="#collapseAlert2" {% endif %}  aria-expanded="false" aria-controls="collapse">Podsumuj</a>		
+</div>
+<div class=" collapse mt-2" id="piecharts">
+  <div class="row">
+    <div class="col-md-6" id="chartIncomes"></div>
+    <div class="col-md-6" id="chartExpenses"></div>
+  </div>
+  {% if sum_incomes > sum_expenses %}
+  <div class='alert alert-success mt-2' role='alert'>
+    Gratulacje. Świetnie zarządzasz finansami!
+    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+    <span aria-hidden='true'>&times;</span>
+    </button>
+  </div>
+ {% else %}
+  <div class='alert alert-danger mt-2' role='alert'>
+    Uważaj! Twoje wydatki są większe niż przychody.
+    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+    <span aria-hidden='true'>&times;</span>
+    </button>
+  </div>
+  {% endif %}
+</div>
 
 </div>	
 </main>
