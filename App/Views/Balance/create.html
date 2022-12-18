@@ -148,7 +148,7 @@
   </div>
   {% if sum_incomes > sum_expenses %}
   <div class='alert alert-success mt-2' role='alert'>
-    Gratulacje. Świetnie zarządzasz finansami!
+    Gratulacje. Świetnie zarządzasz finansami! Twoje wydatki są mniejsze niż przychody. 
     <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
     <span aria-hidden='true'>&times;</span>
     </button>
@@ -162,7 +162,55 @@
   </div>
   {% endif %}
 </div>
-
 </div>	
 </main>
+{% js %}
+<script>
+  // Build the chart
+  Highcharts.chart('chartIncomes', {
+      chart: {
+          plotBackgroundColor: null,
+          plotBorderWidth: null,
+          plotShadow: false,
+          type: 'pie'
+      },
+      title: {
+          text: 'Wykres przychodów za bieżący miesiąc'
+      },
+      tooltip: {
+          pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+      },
+      accessibility: {
+          point: {
+              valueSuffix: '%'
+          }
+      },
+      plotOptions: {
+          pie: {
+              allowPointSelect: true,
+              cursor: 'pointer',
+              dataLabels: {
+                  enabled: false
+              },
+              showInLegend: true
+          }
+      },
+      series: [{
+          name: 'Udział',
+          colorByPoint: true,
+          data: [
+              <?php
+              $data = '';
+             
+                  while ($row = $getDataIncomes->fetch(PDO::FETCH_OBJ)){
+                      $data.='{ name:"'.$row->name.'",y:'.$row->sum.'},';
+                  
+              }
+              echo $data;
+              ?>
+          ]
+      }]
+  });
+</script>
+{% endjs %}
 {% endblock %}
