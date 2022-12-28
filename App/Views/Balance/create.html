@@ -113,8 +113,7 @@
           </tbody>
         </thead>
       </table>	
-    </div>
-  
+    </div>  
   
   <div class="col-md-6 my-2">
     <table class="table table-bordered table-hover">
@@ -142,10 +141,6 @@
   {% if sum_expenses>sum_incomes %} href="#collapseAlert" {% else %} href="#collapseAlert2" {% endif %}  aria-expanded="false" aria-controls="collapse">Podsumuj</a>		
 </div>
 <div class=" collapse mt-2" id="piecharts">
-  <div class="row">
-    <div class="col-md-6" id="chartIncomes"></div>
-    <div class="col-md-6" id="chartExpenses"></div>
-  </div>
   {% if sum_incomes > sum_expenses %}
   <div class='alert alert-success mt-2' role='alert'>
     Gratulacje. Świetnie zarządzasz finansami! Twoje wydatki są mniejsze niż przychody. 
@@ -161,56 +156,61 @@
     </button>
   </div>
   {% endif %}
+  <div class="row">
+    <div class="col-md-6" id="chartIncomes"></div>
+    <div class="col-md-6" id="chartExpenses"></div>
+  </div>
+ 
 </div>
 </div>	
 </main>
-{% js %}
+
 <script>
-  // Build the chart
-  Highcharts.chart('chartIncomes', {
-      chart: {
-          plotBackgroundColor: null,
-          plotBorderWidth: null,
-          plotShadow: false,
-          type: 'pie'
-      },
-      title: {
-          text: 'Wykres przychodów za bieżący miesiąc'
-      },
-      tooltip: {
-          pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-      },
-      accessibility: {
-          point: {
-              valueSuffix: '%'
-          }
-      },
-      plotOptions: {
-          pie: {
-              allowPointSelect: true,
-              cursor: 'pointer',
-              dataLabels: {
-                  enabled: false
-              },
-              showInLegend: true
-          }
-      },
-      series: [{
-          name: 'Udział',
-          colorByPoint: true,
-          data: [
-              <?php
-              $data = '';
-             
-                  while ($row = $getDataIncomes->fetch(PDO::FETCH_OBJ)){
-                      $data.='{ name:"'.$row->name.'",y:'.$row->sum.'},';
-                  
-              }
-              echo $data;
-              ?>
-          ]
-      }]
-  });
+ window.onload = function() {
+
+var chart = new CanvasJS.Chart("chartIncomes", {
+	theme: "light2", // "light1", "light2", "dark1", "dark2"
+	exportEnabled: true,
+	animationEnabled: true,
+	title: {
+		text: "Wykres przychodów"
+	},
+	data: [{
+		type: "pie",
+		startAngle: 25,
+    yValueFormatString: "#,##0.00",
+		toolTipContent: "<b>{label}</b>: <b>{y}PLN</b>",
+		showInLegend: "true",
+		legendText: "{label}",
+		indexLabelFontSize: 14,
+		indexLabel: "{label}: {y} PLN",
+		dataPoints: {{dataIncomesPoints|json_encode|raw}}
+	}]
+});
+chart.render();
+ 
+var chart = new CanvasJS.Chart("chartExpenses", {
+	theme: "light2", // "light1", "light2", "dark1", "dark2"
+	exportEnabled: true,
+	animationEnabled: true,
+	title: {
+		text: "Wykres wydatków"
+	},
+	data: [{
+		type: "pie",
+		startAngle: 25,
+    yValueFormatString: "#,##0.00",
+		toolTipContent: "<b>{label}</b>: <b>{y}PLN</b>",
+		showInLegend: "true",
+		legendText: "{label}",
+		indexLabelFontSize: 14,
+		indexLabel: "{label}: {y} PLN",
+		dataPoints: {{dataExpensesPoints|json_encode|raw}}
+	}]
+});
+chart.render();
+ }
 </script>
-{% endjs %}
+
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 {% endblock %}

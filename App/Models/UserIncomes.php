@@ -84,5 +84,4 @@ class UserIncomes extends \Core\Model
         }
         return number_format($sumIncomes,2,'.','');
     }
-
 }

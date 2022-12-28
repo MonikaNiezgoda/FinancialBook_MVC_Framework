@@ -34,15 +34,16 @@ class Login extends \Core\Controller
     {
         
         $user = User::authenticate($_POST['email'], $_POST['password']);
-
+        
         if ($user) {
 
             Auth::login($user);
             Flash::addMessage('Logowanie się powiodło.');
 
-            $this -> redirect('/Menu/main');
+            $this -> redirect('/menu/main');
 
         } else {
+            Flash::addMessage('Logowanie nieudane, spróbuj ponownie', Flash::WARNING);
 
             View::renderTemplate('Login/new.html');
         

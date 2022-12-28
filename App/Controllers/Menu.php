@@ -4,6 +4,8 @@ namespace App\Controllers;
 
 use \Core\View;
 use \App\Auth;
+use \App\Models\User;
+
 
 class Menu extends Authenticated
 {

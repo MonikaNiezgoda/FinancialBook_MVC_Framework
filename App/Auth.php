@@ -19,11 +19,8 @@ class Auth
      */
     public static function login($user)
     {
-        session_regenerate_id(true);
-
-         $_SESSION['user_id'] = $user->id;
-         
-
+             
+        $_SESSION['user_id'] = $user->id;
     }
 
     /**
@@ -88,6 +85,7 @@ class Auth
 
     public static function getUser()
     {
+        
         if (isset($_SESSION['user_id'])){
             
             return User::findByID($_SESSION['user_id']);
