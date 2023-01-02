@@ -28,16 +28,17 @@ class Balance extends Authenticated
         $allExpenses = $expenses->getExpenses($user->id);
         $allIncomes = $incomes->getIncomes($user->id);
         $sumIncomes=$incomes->sumIncomes($allIncomes);
+        $sumExpenses=$expenses->sumExpenses($allExpenses);
         $dataIncomesPoints = array();
         foreach($allIncomes as $dataIncomes){
-        $dataIncomesPoints[]= array("label"=>$dataIncomes['name'], "y"=>$dataIncomes['sum']);}
+        $dataIncomesPoints[]= array("label"=>$dataIncomes['name'], "y"=>($dataIncomes['sum']*100/$sumIncomes));}
         $dataExpensesPoints = array();
         foreach($allExpenses as $dataExpenses){
-        $dataExpensesPoints[]= array("label"=>$dataExpenses['name'], "y"=>$dataExpenses['sum']);}
+        $dataExpensesPoints[]= array("label"=>$dataExpenses['name'], "y"=>($dataExpenses['sum']*100/$sumExpenses));}
 
             View::renderTemplate('Balance/create.html',[
                 'expenses'=>$allExpenses,
-                'sum_expenses'=>$expenses->sumExpenses($allExpenses),
+                'sum_expenses'=>$sumExpenses,
                 'incomes'=>$allIncomes,
                 'sum_incomes'=>$sumIncomes,
                 'balance'=>$this->checkDate(),

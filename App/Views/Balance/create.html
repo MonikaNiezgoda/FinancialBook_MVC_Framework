@@ -183,7 +183,7 @@ var chart = new CanvasJS.Chart("chartIncomes", {
 		showInLegend: "true",
 		legendText: "{label}",
 		indexLabelFontSize: 14,
-		indexLabel: "{label}: {y} PLN",
+		indexLabel: "{label}: {y}%",
 		dataPoints: {{dataIncomesPoints|json_encode|raw}}
 	}]
 });
@@ -204,7 +204,7 @@ var chart = new CanvasJS.Chart("chartExpenses", {
 		showInLegend: "true",
 		legendText: "{label}",
 		indexLabelFontSize: 14,
-		indexLabel: "{label}: {y} PLN",
+		indexLabel: "{label}: {y}%",
 		dataPoints: {{dataExpensesPoints|json_encode|raw}}
 	}]
 });
