@@ -64,4 +64,16 @@ class Balance extends Authenticated
         }
     }
 
+    public function deleteAction()
+    {
+        if(isset($_POST['delete_id']))
+        {
+            $expenses = new UserExpenses($_POST);
+            $id=$_POST['delete_id'];
+            $expenses->deleteExpense($id);
+            Flash::addMessage('Wydatek  został usunięty', Flash::WARNING);
+            View::renderTemplate('Balance/new.html');
+            
+        } 
+    }
 }

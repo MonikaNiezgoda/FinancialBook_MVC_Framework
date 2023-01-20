@@ -69,9 +69,8 @@ class UserExpenses extends \Core\Model
             $dataod= $_POST['dataOd'];
 		    $datado= $_POST['dataDo'];
         }
-        $sql = "SELECT sum(amount) as sum, name FROM expenses JOIN expenses_category_assigned_to_users as category ON expenses.expense_category_assigned_to_user_id = category.id  
-			WHERE expenses.user_id='$userId' AND date_of_expense BETWEEN '$dataod' AND '$datado'
-			GROUP BY name";
+        $sql = "SELECT amount as sum, name, expenses.id as id FROM expenses JOIN expenses_category_assigned_to_users as category ON expenses.expense_category_assigned_to_user_id = category.id  
+			WHERE expenses.user_id='$userId' AND date_of_expense BETWEEN '$dataod' AND '$datado'";
             $db = static::getDB();
 			$userExpenses = $db->query($sql);
 			return $userExpenses -> fetchAll();
@@ -86,5 +85,12 @@ class UserExpenses extends \Core\Model
         return number_format($sumExpenses,2,'.','');
     }
 
+    public function deleteExpense($id)
+    {
+        $sql = "DELETE FROM expenses WHERE id= '$id'";
+        $db = static::getDB();
+        $delete = $db->query($sql);
+        return $delete;
+    }
 
 }
