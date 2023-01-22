@@ -68,7 +68,7 @@ class UserIncomes extends \Core\Model
             $dataod= $_POST['dataOd'];
 		    $datado= $_POST['dataDo'];
         }
-            $sql = "SELECT sum(amount) as sum, name FROM incomes JOIN incomes_category_assigned_to_users as category ON incomes.income_category_assigned_to_user_id = category.id  
+            $sql = "SELECT amount as sum, name, incomes.id as id FROM incomes JOIN incomes_category_assigned_to_users as category ON incomes.income_category_assigned_to_user_id = category.id  
             WHERE incomes.user_id='$userId' AND date_of_income BETWEEN '$dataod' AND '$datado'
             GROUP BY name";
             $db = static::getDB();
@@ -83,5 +83,13 @@ class UserIncomes extends \Core\Model
         $sumIncomes+=$incomes['sum'];
         }
         return number_format($sumIncomes,2,'.','');
+    }
+
+    public function deleteIncome($id)
+    {
+        $sql = "DELETE FROM incomes WHERE id= '$id'";
+        $db = static::getDB();
+        $delete = $db->query($sql);
+        return $delete;
     }
 }

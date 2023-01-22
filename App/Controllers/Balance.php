@@ -64,14 +64,26 @@ class Balance extends Authenticated
         }
     }
 
-    public function deleteAction()
+    public function deleteExpenseAction()
     {
-        if(isset($_POST['delete_id']))
+        if(isset($_POST['expense_id']))
         {
             $expenses = new UserExpenses($_POST);
-            $id=$_POST['delete_id'];
+            $id=$_POST['expense_id'];
             $expenses->deleteExpense($id);
-            Flash::addMessage('Wydatek  został usunięty', Flash::WARNING);
+            Flash::addMessage('Wydatek został usunięty', Flash::WARNING);
+            View::renderTemplate('Balance/new.html');
+            
+        } 
+    }
+    public function deleteIncomeAction()
+    {
+        if(isset($_POST['income_id']))
+        {
+            $incomes = new UserIncomes($_POST);
+            $id=$_POST['income_id'];
+            $incomes->deleteIncome($id);
+            Flash::addMessage('Przychód został usunięty', Flash::WARNING);
             View::renderTemplate('Balance/new.html');
             
         } 
