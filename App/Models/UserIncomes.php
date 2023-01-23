@@ -92,4 +92,11 @@ class UserIncomes extends \Core\Model
         $delete = $db->query($sql);
         return $delete;
     }
+    public function editIncome($id,$amount)
+    {
+        $sql = "UPDATE incomes SET amount='$amount'  WHERE id= '$id'";
+        $db = static::getDB();
+        $edit = $db->query($sql);
+        return $edit;
+    }
 }

@@ -75,6 +75,9 @@ class Balance extends Authenticated
             View::renderTemplate('Balance/new.html');
             
         } 
+
+        else
+        View::renderTemplate('Balance/new.html');
     }
     public function deleteIncomeAction()
     {
@@ -88,4 +91,18 @@ class Balance extends Authenticated
             
         } 
     }
+    public function editIncomeAction()
+    {
+        if(isset($_POST['income_id']))
+        {
+            $incomes = new UserIncomes($_POST);
+            $id=$_POST['income_id'];
+            $amount=$_POST['sum_income'];
+            $incomes->editIncome($id,$amount);
+            Flash::addMessage('Wartość przychodu została zmieniona', Flash::WARNING);
+            View::renderTemplate('Balance/new.html');
+            
+        } 
+    }
+
 }
