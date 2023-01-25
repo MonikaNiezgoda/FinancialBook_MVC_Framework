@@ -64,27 +64,12 @@ class Balance extends Authenticated
         }
     }
 
-    public function deleteExpenseAction()
-    {
-        if(isset($_POST['expense_id']))
-        {
-            $expenses = new UserExpenses($_POST);
-            $id=$_POST['expense_id'];
-            $expenses->deleteExpense($id);
-            Flash::addMessage('Wydatek został usunięty', Flash::WARNING);
-            View::renderTemplate('Balance/new.html');
-            
-        } 
-
-        else
-        View::renderTemplate('Balance/new.html');
-    }
     public function deleteIncomeAction()
     {
-        if(isset($_POST['income_id']))
+        if(isset($_POST['delete_income']))
         {
             $incomes = new UserIncomes($_POST);
-            $id=$_POST['income_id'];
+            $id=$_POST['delete_income'];
             $incomes->deleteIncome($id);
             Flash::addMessage('Przychód został usunięty', Flash::WARNING);
             View::renderTemplate('Balance/new.html');
@@ -100,6 +85,19 @@ class Balance extends Authenticated
             $amount=$_POST['sum_income'];
             $incomes->editIncome($id,$amount);
             Flash::addMessage('Wartość przychodu została zmieniona', Flash::WARNING);
+            View::renderTemplate('Balance/new.html');
+            
+        } 
+    }
+
+    public function deleteExpenseAction()
+    {
+        if(isset($_POST['delete_expense']))
+        {
+            $expenses = new UserExpenses($_POST);
+            $id=$_POST['delete_expense'];
+            $expenses->deleteExpense($id);
+            Flash::addMessage('Wydatek został usunięty', Flash::WARNING);
             View::renderTemplate('Balance/new.html');
             
         } 
