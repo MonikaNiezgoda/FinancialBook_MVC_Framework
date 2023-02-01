@@ -15,4 +15,12 @@ class Settings extends Authenticated
         $this->requireLogin();
         View::renderTemplate('Settings/new.html');
     }
+
+    public function expensesAction()
+    {  
+        echo json_encode(UserExpenses::findAllExpensesCat(113));
+       
+    }
 }
+
+?>

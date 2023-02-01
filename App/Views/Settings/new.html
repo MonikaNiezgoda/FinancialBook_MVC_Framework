@@ -68,36 +68,33 @@
 <main>
   <div class="container">
     <div class="row justify-content-center mb-2 mt-2">
-      <div class= "col-md-4">
+      <div class= "col-md-6 ">
         <h3> Ustawienia</h3>
       </div>
     </div>
-    <div class="row justify-content-center mb-2 mt-2">
-      <div class="col-md-8">	
+    <div class="row justify-content-center">
+      <div class="col-md-6 justify-content-center mb-2">	
         <button class="btn btn-warning btn-block" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" id="incomesCat">
           Kategorie przychodów 
         </button>
       </div>
+      <div class="col-md-6 justify-content-center mb-2">	
+        <button class="btn btn-warning btn-block" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" id="expensesCat">
+          Kategorie wydatków 
+        </button>
+      </div>
     </div>
   </div>
-  <div id="collapse" class="collapse row justify-content-center">
-    <div class="card-body col-md-8 justify-content-center mb-2 mt-2">
-      <li>Kategoria1</li>
-      <li>Ketegoria2</li>
+  <div class="row">
+    <div id="collapseIncomes" class="card-body col-md-6 ">
+      <div id="incomes">
+      </div>
+    </div>
+    <div id="collapseExpenses" class="card-body col-md-6 ">
+      <div id="expenses">
+      </div>
+    </div>
   </div>
-</div>
-  <script>
-    $("#incomesCat").on('click', function (){
-    
-      $('#collapse').collapse('show')
-  });
-
-  $("#incomesCat").on('click', function (){
-    
-    $('#collapse').collapse('hide')
-});
-
-  </script>
-    
+ <script src="/js/limit.js"></script>
   
 {% endblock %}
