@@ -18,7 +18,14 @@ class Settings extends Authenticated
 
     public function expensesAction()
     {  
-        echo json_encode(UserExpenses::findAllExpensesCat(113));
+        $user = Auth::getUser();
+        echo json_encode(UserExpenses::findAllExpensesCat($user->id));
+       
+    }
+    public function incomesAction()
+    {  
+        $user = Auth::getUser();
+        echo json_encode(UserIncomes::findAllIncomesCat($user->id));
        
     }
 }

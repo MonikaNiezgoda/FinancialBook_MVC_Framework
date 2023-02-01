@@ -33,5 +33,6 @@ $router->add('', ['controller' => 'Home', 'action' => 'index']);
 $router->add('login', ['controller' => 'Login', 'action' => 'new']);
 $router->add('logout', ['controller' => 'Login', 'action' => 'destroy']);
 $router->add('api/expenses', ['controller' => 'Settings', 'action' => 'expenses']);
+$router->add('api/incomes', ['controller' => 'Settings', 'action' => 'incomes']);
 $router->add('{controller}/{action}');
 $router->dispatch($_SERVER['QUERY_STRING']);

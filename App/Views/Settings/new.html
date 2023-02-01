@@ -72,28 +72,31 @@
         <h3> Ustawienia</h3>
       </div>
     </div>
-    <div class="row justify-content-center">
-      <div class="col-md-6 justify-content-center mb-2">	
-        <button class="btn btn-warning btn-block" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" id="incomesCat">
+    
+      <div class="col-md-8 justify-content-center align-self-center">	
+        <button class="btn btn-warning btn-block mb-2" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" id="incomesCat">
           Kategorie przychodów 
         </button>
-      </div>
-      <div class="col-md-6 justify-content-center mb-2">	
+        <div class="row">
+          <div id="collapseIncomes" class="card-body">
+            <div id="incomes">
+            </div>
+          </div>
+        </div>
+      
         <button class="btn btn-warning btn-block" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" id="expensesCat">
           Kategorie wydatków 
         </button>
+        <div class="row">
+          <div id="collapseExpenses" class="card-body">
+            <div id="expenses">
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
   </div>
-  <div class="row">
-    <div id="collapseIncomes" class="card-body col-md-6 ">
-      <div id="incomes">
-      </div>
-    </div>
-    <div id="collapseExpenses" class="card-body col-md-6 ">
-      <div id="expenses">
-      </div>
-    </div>
+  
+    
   </div>
  <script src="/js/limit.js"></script>
   
