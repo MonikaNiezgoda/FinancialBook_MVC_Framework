@@ -43,9 +43,15 @@ function loadContentIncomes () {
       <button class="d-flex justify-content-start btn btn-outline-warning btn-block btn-sm" type="button">${categories.name} ${categories.id}</button>`;
     html+=htmlSegment;
   });
-  html+=`<button class="btn btn-success btn-block btn-sm" type="button"> Dodaj nową kategorię wydatku</button>`;
+  html+=`<button class="btn btn-success btn-block btn-sm addIncomeCat" type="button" > Dodaj nową kategorię przychodu</button>`;
   let collapse = document.querySelector('#incomes');
     collapse.innerHTML = html;
   })
   .catch((error) => { console.log(error); });
   }
+
+  $(".addIncomeCat").on('click', function (){
+    let num =13;
+    console.log(num);
+    $('#addCategoryI').modal('show')
+  });

@@ -13,21 +13,17 @@ class Settings extends Authenticated
     public function newAction()
     {
         $this->requireLogin();
-        View::renderTemplate('Settings/new.html');
+        $user = Auth::getUser();
+        $expensesCategories = (UserExpenses::findAllExpensesCat($user->id));
+        $user = Auth::getUser();
+        $incomesCategories = (UserIncomes::findAllIncomesCat($user->id));
+
+        View::renderTemplate('Settings/new.html',[
+            'incomes'=>$incomesCategories,
+            'expenses'=>$expensesCategories
+        ]);
     }
 
-    public function expensesAction()
-    {  
-        $user = Auth::getUser();
-        echo json_encode(UserExpenses::findAllExpensesCat($user->id));
-       
-    }
-    public function incomesAction()
-    {  
-        $user = Auth::getUser();
-        echo json_encode(UserIncomes::findAllIncomesCat($user->id));
-       
-    }
 }
 
 ?>
