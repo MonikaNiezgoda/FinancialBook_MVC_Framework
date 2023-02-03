@@ -24,6 +24,17 @@ class Settings extends Authenticated
         ]);
     }
 
+    public function addNewIncomeCatAction()
+    {
+        $user = Auth::getUser();
+        $income = new UserIncomes($_POST);
+        $income->add($user->id);
+
+        Flash::addMessage('Nowa kategoria przychodu została dodana.');
+        $this-> redirect('/settings/new');
+
+    }
+
 }
 
 ?>

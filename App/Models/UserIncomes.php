@@ -98,4 +98,12 @@ class UserIncomes extends \Core\Model
         $edit = $db->query($sql);
         return $edit;
     }
+
+    public function add($userId)
+    {
+        $newCat=$_POST['newCategory'];
+		
+		$db = static::getDB();
+		$addIncomeCat = $db ->exec("INSERT INTO incomes_category_assigned_to_users VALUES (NULL , '$userId', '$newCat')");
+    }
 }
