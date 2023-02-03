@@ -30,7 +30,7 @@ input[type=number]:focus
 
 textarea
 {
-	resize:none;
+	resize:none !important;
 }
 textarea:focus
 {
@@ -60,13 +60,32 @@ select:focus
 	.table
 	{
 	background-color:#F7EFC2;
+	
 	}
 	
 	td
 	{
 		width: 50%;
+		vertical-align: middle;
+		
 	}
-	
+
+	td.rounded {
+		border-radius: 3px !important;
+		background-color:#F7EFC2;
+		border: 2px solid grey;
+		
+	  }
+	  table.categories {
+		border-radius: 3px !important;
+			border-collapse: separate;
+			border-spacing: 5px ;
+			width: 100% !important;
+			
+	  }
+
+
+
 	.dropdown-item:hover
 {
 	background-color: #F7EFC2 !important;

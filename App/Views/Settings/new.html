@@ -6,7 +6,7 @@
 	<meta name="keywords" content="ustawienia, aplikacja, finansowa, menu">
 	<meta name="author" content="Monika Niezgoda">
 	<meta http-equiv="X-Ua-Compatible" content="IE=edge">
-  
+
   {% endblock %}
 
 {% block body %}
@@ -70,39 +70,17 @@
     <div class="row justify-content-center mb-2 mt-2">
       <h3> Ustawienia</h3>
       </div>
+    
     <div class="row justify-content-center">
       <div class="col-8 col-md-6">	
-        <button class="btn btn-warning btn-block mb-2" type="button" href="#collapseIncomes" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" id="incomesCat">
-          Kategorie przychodów 
-        </button>
-          <div class="collapse" id="collapseIncomes">
-            <table class="table table-sm table-bordered table-hover">
-              <tbody>
-                {% for income in incomes %}
-              <tr><td>{{income.name}} {{income.id}}
-                <button class="btn btn-outline-dark btn-sm mx-1 float-right deleteExpense" type="button" value="{{income.id}}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                  <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-                  <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-                </svg></button>
-              </td> 
-              </tr>
-              {% endfor %}
-            </tbody>
-            </table>
-            <button class="btn btn-success btn-block btn-sm mb-2" type="button" > Dodaj nową kategorię przychodu</button>
-          </div>
-      </div>
-    </div>
-    <div class="row justify-content-center">
-      <div class="col-8 col-md-6">	
-        <button class="btn btn-warning btn-block mb-2" type="button"   href="#collapseExpenses" aria-expanded="false" >
+        <button class="btn btn-warning btn-block mb-2" type="button"   href="#collapse2" aria-expanded="false" data-toggle="collapse">
           Kategorie wydatków 
         </button>
-          <div class="collapse" id="collapseExpenses">
+          <div class="collapse" id="collapse2">
             <table class="table table-sm table-bordered table-hover">
               <tbody>
               {% for expense in expenses %}
-              <tr><td>{{expense.name}} {{expense.id}}
+              <tr><td>{{expense.name}}
                 <button class="btn btn-outline-dark btn-sm mx-1 float-right deleteExpense" type="button" value="{{expenses.id}}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
                   <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
                   <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
@@ -112,15 +90,61 @@
               {% endfor %}
             </tbody>
             </table>
-            <button class="btn btn-success btn-block btn-sm mb-2" type="button" > Dodaj nową kategorię wydatku</button>
+            <button class="btn btn-success btn-block btn-sm mb-2" type="button" id="newExpenseCat" > Dodaj nową kategorię wydatku</button>
           </div>
       </div>
     </div>
+    <div class="row justify-content-center">
+      <div class="col-8 col-md-6">	
+        <button class="btn btn-warning btn-block mb-2" type="button" data-toggle="collapse" data-target="#collapseIncomes" aria-expanded="false" aria-controls="collapseIncomes">
+          Kategorie przychodów 
+        </button>
+        <div class="collapse" id="collapseIncomes">
+          <div class="table-responsive">
+          <table class= " table-sm table-hover categories ">
+            <tbody>
+            {% for income in incomes %}
+            <tr><td class="rounded">{{income.name}}
+              <button class="btn btn-outline-dark btn-sm mx-1 float-right deleteExpense" type="button" value="{{expenses.id}}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+              </svg></button>
+            </td> 
+            </tr>
+            {% endfor %}
+          </tbody>
+          </table>
+          <button class="btn btn-success btn-block btn-sm mb-2" type="button" data-toggle="modal" data-target="#addIncomeCat"> Dodaj nową kategorię przychodu</button>
+        </div>
+      </div>
+    </div>
   </div>
-  
-    
+
+<!--Add New Income Category Modal -->
+<div class="modal fade" tabindex="-1" role="dialog" id="addIncomeCat" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form action="/settings/addNewIncomeCat" method="POST">
+      <div class="modal-body">
+        <p>Dodawanie nowej kategorii przychodu</p> 
+        <div class="input-group mb-1">
+          <input type="text" class="form-control input-sm " placeholder="Nazwa nowej kategorii"  name="newCategory" required>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn-sm btn-primary">Zapisz</button>
+        <button type="button" class="btn-sm btn-secondary" data-dismiss="modal">Anuluj</button>
+      </div>
+      </form>
+    </div>
   </div>
-  
- //<script src="/js/limit.js"></script>
-  
+</div>
+
+</main>
 {% endblock %}
