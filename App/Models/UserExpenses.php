@@ -93,4 +93,12 @@ class UserExpenses extends \Core\Model
         return $delete;
     }
 
+    public function addCategory($userId)
+    {
+        $newCat=$_POST['newCategory'];
+		
+		$db = static::getDB();
+		$addExpenseCat = $db ->exec("INSERT INTO expenses_category_assigned_to_users VALUES (NULL , '$userId', '$newCat')");
+    }
+
 }

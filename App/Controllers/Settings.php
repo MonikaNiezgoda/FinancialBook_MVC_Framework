@@ -35,6 +35,27 @@ class Settings extends Authenticated
 
     }
 
+    public function addNewExpenseCatAction()
+    {
+        $user = Auth::getUser();
+        $expense = new UserExpenses($_POST);
+        $expense->addCategory($user->id);
+
+        Flash::addMessage('Nowa kategoria wydatku została dodana.');
+        $this-> redirect('/settings/new');
+
+    }
+
+    public function deleteIncomesAction()
+    {
+        
+        $catId=$_POST['delete_incomes'];
+        UserIncomes::deleteIncomeCategory($catId);
+        Flash::addMessage('Kategoria przychodu została usunięta.');
+        $this-> redirect('/settings/new');
+
+    }
+
 }
 
 ?>

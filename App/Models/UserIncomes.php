@@ -106,4 +106,11 @@ class UserIncomes extends \Core\Model
 		$db = static::getDB();
 		$addIncomeCat = $db ->exec("INSERT INTO incomes_category_assigned_to_users VALUES (NULL , '$userId', '$newCat')");
     }
+
+    static function deleteIncomeCategory($id)
+    {
+		$db = static::getDB();
+		$deleteIncomeCat = $db ->exec("DELETE FROM incomes_category_assigned_to_users WHERE id= '$id'");
+        $delete = $db->exec("DELETE FROM incomes WHERE income_category_assigned_to_user_id= '$id'");
+    }
 }
