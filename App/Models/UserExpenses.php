@@ -101,4 +101,11 @@ class UserExpenses extends \Core\Model
 		$addExpenseCat = $db ->exec("INSERT INTO expenses_category_assigned_to_users VALUES (NULL , '$userId', '$newCat')");
     }
 
+    static function deleteExpenseCategory($id)
+    {
+		$db = static::getDB();
+		$deleteIncomeCat = $db ->exec("DELETE FROM expenses_category_assigned_to_users WHERE id= '$id'");
+        $delete = $db->exec("DELETE FROM expenses WHERE expense_category_assigned_to_user_id= '$id'");
+    }
+
 }

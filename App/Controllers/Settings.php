@@ -56,6 +56,16 @@ class Settings extends Authenticated
 
     }
 
+    public function deleteExpensesAction()
+    {
+        
+        $catId=$_POST['delete_expenses'];
+        UserExpenses::deleteExpenseCategory($catId);
+        Flash::addMessage('Kategoria wydatku została usunięta.');
+        $this-> redirect('/settings/new');
+
+    }
+
 }
 
 ?>
