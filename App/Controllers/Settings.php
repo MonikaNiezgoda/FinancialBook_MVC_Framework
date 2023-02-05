@@ -66,6 +66,17 @@ class Settings extends Authenticated
 
     }
 
+    public function editExpenseAction()
+    {
+        
+        $catId=$_POST['edit_expense'];
+        $limit=$_POST['limit_category'];
+        UserExpenses::addLimit($catId, $limit);
+        Flash::addMessage('Dodano limit do kategorii wydatku.');
+        $this-> redirect('/settings/new');
+
+    }
+
 }
 
 ?>

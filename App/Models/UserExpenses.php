@@ -107,5 +107,11 @@ class UserExpenses extends \Core\Model
 		$deleteIncomeCat = $db ->exec("DELETE FROM expenses_category_assigned_to_users WHERE id= '$id'");
         $delete = $db->exec("DELETE FROM expenses WHERE expense_category_assigned_to_user_id= '$id'");
     }
+    static function addLimit($id, $limit)
+    {
+		$db = static::getDB();
+		$deleteIncomeCat = $db ->exec("UPDATE expenses_category_assigned_to_users SET category_limit='$limit'  WHERE id= '$id'");
+        
+    }
 
 }

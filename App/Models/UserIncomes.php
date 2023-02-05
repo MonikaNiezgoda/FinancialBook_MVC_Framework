@@ -113,4 +113,6 @@ class UserIncomes extends \Core\Model
 		$deleteIncomeCat = $db ->exec("DELETE FROM incomes_category_assigned_to_users WHERE id= '$id'");
         $delete = $db->exec("DELETE FROM incomes WHERE income_category_assigned_to_user_id= '$id'");
     }
+
+    
 }
