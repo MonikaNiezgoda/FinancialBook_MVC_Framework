@@ -9,7 +9,7 @@ class UserExpenses extends \Core\Model
 {
     public static function findAllExpensesCat($id)
     {
-        $sql=("SELECT id, name FROM `expenses_category_assigned_to_users` WHERE user_id='$id'");	
+        $sql=("SELECT id, name, category_limit FROM `expenses_category_assigned_to_users` WHERE user_id='$id'");	
 		$db = static::getDB();
         $stmt = $db ->query($sql);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
