@@ -73,7 +73,7 @@
     
     <div class="row justify-content-center">
       <div class="col-8 col-md-6">	
-        <button class="btn btn-warning btn-block mb-2" type="button"   href="#collapseExpenses" aria-expanded="false" data-toggle="collapse">
+        <button class="btn btn-warning btn-block mb-2 float-left" type="button"   href="#collapseExpenses" aria-expanded="false" data-toggle="collapse">
           Kategorie wydatków 
         </button>
           <div class="collapse" id="collapseExpenses">
@@ -91,7 +91,7 @@
                   <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
                 </svg></button>
                 {% if expense.category_limit > 0 %}
-                <br/> Limit: {{expense.category_limit}}
+                <br> Limit: {{expense.category_limit}}
                 {% endif %}
               </td> 
               </tr>
@@ -186,19 +186,21 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
+        <p>Usuwanie kategorii</p>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <form action="/settings/deleteIncomes" method="POST">
       <div class="modal-body">
+        <div class="h6" id="delIncome"></div>
         <input type="hidden" name="delete_incomes" id="delete_incomes">
+
         <p>Zostaną usunięte wszystkie przychody dodane w tej kategorii</p> 
-        <p>Czy na pewno chcesz usunąć tą kategorię przychodu?</p>
       </div>
       <div class="modal-footer">
-        <button type="submit" class="btn btn-primary">Tak</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Nie</button>
+        <button type="submit" class="btn btn-primary">Usuń</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Anuluj</button>
       </div>
       </form>
     </div>
@@ -210,19 +212,20 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
+        <p>Usuwanie kategorii</p>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <form action="/settings/deleteExpenses" method="POST">
       <div class="modal-body">
+        <div class="h6" id="delExpense"></div>
         <input type="hidden" name="delete_expenses" id="delete_expenses">
-        <p>Zostaną usunięte wszystkie wydatki dodane w tej kategorii</p> 
-        <p>Czy na pewno chcesz usunąć tą kategorię wydatku?</p>
+        <p>Zostaną usunięte także wszystkie wydatki dodane w tej kategorii</p> 
       </div>
       <div class="modal-footer">
-        <button type="submit" class="btn btn-primary">Tak</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Nie</button>
+        <button type="submit" class="btn btn-primary">Usuń</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Anuluj</button>
       </div>
       </form>
     </div>
@@ -241,7 +244,7 @@
       <div class="modal-body ">
         <form action="/settings/editExpense" method="POST">
         <input type="hidden" name="edit_expense" id="edit_expense">
-        <div class="h5" id="editModal"></div>
+        <div class="h6" id="editModal"></div>
         <div class="custom-control custom-checkbox mt-1">
           <input type="checkbox" class="custom-control-input" id="limitCheck">
           <label class="custom-control-label" for="limitCheck">Ustaw limit na danej kategorii</label>
@@ -263,7 +266,13 @@
 
 <script>
   $(".deleteIncomeCat").on('click', function (){
+    const tdElement = this.closest('td');
+    const tdValue = tdElement.innerHTML;
+    const plainText = tdValue.replace(/<[^>]+>/g, '');
+    let name = plainText.split(' ')[0];
     
+    $("#delIncome").html(name);
+
     $('#deleteIncome').modal('show');
     
     const value = this.value;
@@ -274,6 +283,12 @@
 
   $(".deleteExpenseCat").on('click', function (){
     
+    const tdElement = this.closest('td');
+    const tdValue = tdElement.innerHTML;
+    const plainText = tdValue.replace(/<[^>]+>/g, '');
+    let name = plainText.split(' ')[0];
+    
+    $("#delExpense").html(name);
     $('#deleteExpense').modal('show');
     
     const value = this.value;
@@ -287,7 +302,18 @@
     const tdElement = this.closest('td');
     const tdValue = tdElement.innerHTML;
     const plainText = tdValue.replace(/<[^>]+>/g, '');
-    $("#editModal").html(plainText);
+    let name = plainText.split(' ')[0];
+    
+    let result = plainText.match(/Limit:\s*(\d+)/);
+        if (result) {
+    let limit = result[1];
+    var cat_limit= ("Limit: " + limit);
+  } else {
+    var cat_limit="";
+  }
+    let text = name + "<br>" + cat_limit;
+    $("#editModal").html(text);
+
     const deleteButton = this.previousElementSibling;
     const expenseId = deleteButton.getAttribute("value");
     $("#edit_expense").val(expenseId);
