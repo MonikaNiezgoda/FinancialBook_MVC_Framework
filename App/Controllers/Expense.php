@@ -28,4 +28,11 @@ class Expense extends Authenticated
         Flash::addMessage('Wydatek został dodany.');
         $this-> redirect('/expense/create');
     }
+
+    public function getLimitAction()
+    {
+       // $id = $_GET['id'];
+       echo json_encode(UserExpenses::getCatLimit(37), JSON_UNESCAPED_UNICODE);
+    }
+
 }

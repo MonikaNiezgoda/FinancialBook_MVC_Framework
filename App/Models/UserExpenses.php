@@ -114,4 +114,13 @@ class UserExpenses extends \Core\Model
         
     }
 
+    public static function getCatLimit($id)
+    {
+        $sql=("SELECT category_limit FROM `expenses_category_assigned_to_users` WHERE id='$id'");	
+		$db = static::getDB();
+        $stmt = $db ->query($sql);
+        return $stmt->fetch();
+        
+    }
+
 }
