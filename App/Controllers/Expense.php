@@ -30,9 +30,29 @@ class Expense extends Authenticated
     }
 
     public function getLimitAction()
-    {
-       // $id = $_GET['id'];
-       echo json_encode(UserExpenses::getCatLimit(37), JSON_UNESCAPED_UNICODE);
+{
+    $id = $this->route_params['id'];
+        
+    $categoryLimit = UserExpenses::getCatLimit($id);
+    if ($categoryLimit === false) {
+        http_response_code(404);
+        echo json_encode(['error' => 'Category limit not found']);
+    } else {
+        $response = ['category_limit' => $categoryLimit];
+        header('Content-Type: application/json');
+        echo json_encode($response);
     }
+}
 
+public function getExpensesByDateAction()
+{
+    $id = $this->route_params['id'];
+    $date = $_GET['date']; 
+    $response = UserExpenses::getMonthExpenses($id,$date);
+    
+        //$response = ['category_limit' => $categoryLimit];
+        header('Content-Type: application/json');
+        echo json_encode($response);
+    
+}
 }

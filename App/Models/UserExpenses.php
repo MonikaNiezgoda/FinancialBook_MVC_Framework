@@ -116,11 +116,32 @@ class UserExpenses extends \Core\Model
 
     public static function getCatLimit($id)
     {
-        $sql=("SELECT category_limit FROM `expenses_category_assigned_to_users` WHERE id='$id'");	
-		$db = static::getDB();
-        $stmt = $db ->query($sql);
-        return $stmt->fetch();
+    $sql = "SELECT category_limit FROM expenses_category_assigned_to_users WHERE id = :id";
+    $db = static::getDB();
+    $stmt = $db->prepare($sql);
+    $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetchColumn();
         
     }
 
+    public static function getFirstAndLastDayOfMonth($date) {
+        $firstDay = date('Y-m-01', strtotime($date));
+        $lastDay = date('Y-m-t', strtotime($date));
+        return [$firstDay, $lastDay];
+      }
+
+    public static function getMonthExpenses($id,$date)
+    {
+        list($firstDay, $lastDay) = self::getFirstAndLastDayOfMonth($date);
+        
+        $sql = "SELECT sum(amount) as sum FROM `expenses`
+         WHERE expense_category_assigned_to_user_id = '$id' 
+         AND date_of_expense BETWEEN '$firstDay' AND '$lastDay'";
+         $db = static::getDB();
+         $stmt = $db->prepare($sql);
+         $stmt->execute();
+         return $stmt->fetchColumn();
+    
+    }
 }

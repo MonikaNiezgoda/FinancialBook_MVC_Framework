@@ -28,11 +28,14 @@ session_start();
 $router = new Core\Router();
 
 // Add the routes
+$router->add('date/{id:\d+}', ['controller' => 'Expense', 'action' => 'getExpensesByDate']);
 
 $router->add('', ['controller' => 'Home', 'action' => 'index']);
+
+$router->add('api/limit/{id:\d+}', ['controller' => 'Expense', 'action' => 'getLimit']);
+
 $router->add('login', ['controller' => 'Login', 'action' => 'new']);
 $router->add('logout', ['controller' => 'Login', 'action' => 'destroy']);
-$router->add('api/expenses', ['controller' => 'Expense', 'action' => 'getLimit']);
 $router->add('api/incomes', ['controller' => 'Settings', 'action' => 'incomes']);
 $router->add('{controller}/{action}');
 $router->dispatch($_SERVER['QUERY_STRING']);
