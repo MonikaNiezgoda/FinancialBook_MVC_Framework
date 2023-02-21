@@ -1,3 +1,4 @@
+
 const getLimitCategory = (id) => {
   return fetch(`/api/limit/${id}`)
     .then(response => response.json())
@@ -13,38 +14,43 @@ const getMonthExpenses = (id, date) => {
   return fetch(`/date/${id}?date=${date}`)
     .then(response => response.json())
     .then(data => {
-      console.log(data);
-      //return data.category_limit;
+      return data;
     })
     .catch(error => {
       console.error('Error:', error);
     });
 };
 
-const countLimitLeft = (limit, newExpense) => {
-  return limit - newExpense ;
+const countLimitLeft = (limit, data) => {
+  const newExpense = $("#kwota").val();
+  const myAlert = $("#myAlert");
+  const totalLeft = limit - data - newExpense;
+  if(limit===0)
+  {
+    myAlert.removeClass("alert-danger").addClass("alert-warning");
+    myAlert.html(`Dla wybranej kategorii nie ma ustawionego limitu`);
+  }
+  else if(limit>0)
+  {
+    if (totalLeft > 0) {
+    myAlert.removeClass("alert-danger").addClass("alert-success");
+    myAlert.html(`<strong>Uwaga!</strong> <br/> Pozostało Ci jeszcze ${totalLeft} zł z limitu.`);
+  } else if(totalLeft < 0) {
+    myAlert.removeClass("alert-success").addClass("alert-danger");
+    myAlert.html(`<strong>Uwaga!</strong> Limit został już wyczerpany! </br> Przekroczyłeś limit o ${Math.abs(totalLeft)} zł `);
+  }
+}
+  
 }
 
-$("#data").change(function(){
-  const id = $("#kategoria").val();
-  console.log(id);
-  getMonthExpenses(id, $("#data").val());
-  getLimitCategory(id)
-});
 
 $("#kategoria").change(function() {
-  getLimitCategory($(this).val())
-  .then(limit => {
-    {
-      const newExpense = $("#kwota").val();
-      console.log(newExpense);
-
-      const left = countLimitLeft(limit, newExpense);
-      console.log(left);
-
-    }
+  getMonthExpenses($("#kategoria").val(), $("#data").val())
+  .then(data => {
+    getLimitCategory($(this).val())
+    .then(limit => {
+      countLimitLeft(limit, data);
+    });
   });
 });
-// var month = extractMonth($("#data").val());
-  //getMonthExpenses(month);
-  
+

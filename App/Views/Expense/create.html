@@ -69,6 +69,12 @@
     <div class="row justify-content-center mb-2 mt-2">
     <h3> Dodawanie wydatku</h3>
     </div>
+    <div class="row justify-content-center">
+    <div class="col-6 alert" role="alert" id="myAlert">
+      <!-- treść alertu zostanie zaktualizowana za pomocą JavaScript -->
+    </div>
+  </div>
+    
     <form method="post" action="/expense/add">
     <div class="row justify-content-center">
       <div class=" col-8  col-md-6">
@@ -92,7 +98,7 @@
       <div class="col-8  col-md-6">
         <div class="input-group mb-3">
               <select class="form-control"  id="kategoria" name="kategoria" required>
-
+                <option value="" disabled selected>Wybierz kategorię</option>
                 {% for expenses in expenses_categories %}
                 <option value="{{expenses.id}}"> {{ expenses.name }} </option>
                 {% endfor %}
