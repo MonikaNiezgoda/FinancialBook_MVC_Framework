@@ -28,7 +28,7 @@ class UserExpenses extends \Core\Model
         foreach($expensesCategory as $expensesCategory) {
         $categoryName=$expensesCategory['name'];
         $sql="INSERT INTO expenses_category_assigned_to_users
-             VALUES (NULL, '$id', '$categoryName')";
+             VALUES (NULL, '$id', '$categoryName', '0')";
 		$db->exec($sql);
 		}
 

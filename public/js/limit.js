@@ -1,6 +1,6 @@
 
 const getLimitCategory = (id) => {
-  return fetch(`/api/limit/${id}`)
+  return fetch(`https:///api/limit/${id}`)
     .then(response => response.json())
     .then(data => {
       return data.category_limit;
@@ -11,7 +11,7 @@ const getLimitCategory = (id) => {
 };
 
 const getMonthExpenses = (id, date) => {
-  return fetch(`/date/${id}?date=${date}`)
+  return fetch(`https:///date/${id}?date=${date}`)
     .then(response => response.json())
     .then(data => {
       return data;
@@ -24,24 +24,16 @@ const getMonthExpenses = (id, date) => {
 const countLimitLeft = (limit, data) => {
   const newExpense = $("#kwota").val();
   const myAlert = $("#myAlert");
-  const totalLeft = limit - data - newExpense;
-  if(limit===0)
-  {
-    myAlert.removeClass("alert-danger").addClass("alert-warning");
-    myAlert.html(`Dla wybranej kategorii nie ma ustawionego limitu wydatków.`);
-  }
-  else if(limit>0)
-  {
-    if (totalLeft > 0) {
-    myAlert.removeClass("alert-danger").addClass("alert-success");
-    myAlert.html(`<strong>Uwaga!</strong> <br/> Pozostało Ci jeszcze ${totalLeft} zł z limitu w wybranym miesiącu`);
-  } else if(totalLeft < 0) {
-    myAlert.removeClass("alert-success").addClass("alert-danger");
-    myAlert.html(`<strong>Uwaga!</strong> W wybranym miesiącu limit został już wyczerpany! </br> Przekroczyłeś limit o <strong>${Math.abs(totalLeft)} zł </strong> `);
-  }
-}
+  const totalLeft = totalLeft = limit - newExpense;
   
-}
+  if (totalLeft > 0) {
+      myAlert.removeClass("alert-danger").addClass("alert-success");
+      myAlert.html(`<strong>Uwaga!</strong> <br/> Pozostało Ci jeszcze ${totalLeft} zł z limitu w wybranym miesiącu`);
+    } else if(totalLeft < 0) {
+      myAlert.removeClass("alert-success").addClass("alert-danger");
+      myAlert.html(`<strong>Uwaga!</strong> W wybranym miesiącu limit został już wyczerpany! </br> Przekroczyłeś limit o <strong>${Math.abs(totalLeft)} zł </strong> `);
+    }
+  }
 
 
 $("#kategoria").change(function() {
