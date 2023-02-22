@@ -28,16 +28,16 @@ const countLimitLeft = (limit, data) => {
   if(limit===0)
   {
     myAlert.removeClass("alert-danger").addClass("alert-warning");
-    myAlert.html(`Dla wybranej kategorii nie ma ustawionego limitu`);
+    myAlert.html(`Dla wybranej kategorii nie ma ustawionego limitu wydatków.`);
   }
   else if(limit>0)
   {
     if (totalLeft > 0) {
     myAlert.removeClass("alert-danger").addClass("alert-success");
-    myAlert.html(`<strong>Uwaga!</strong> <br/> Pozostało Ci jeszcze ${totalLeft} zł z limitu.`);
+    myAlert.html(`<strong>Uwaga!</strong> <br/> Pozostało Ci jeszcze ${totalLeft} zł z limitu w wybranym miesiącu`);
   } else if(totalLeft < 0) {
     myAlert.removeClass("alert-success").addClass("alert-danger");
-    myAlert.html(`<strong>Uwaga!</strong> Limit został już wyczerpany! </br> Przekroczyłeś limit o ${Math.abs(totalLeft)} zł `);
+    myAlert.html(`<strong>Uwaga!</strong> W wybranym miesiącu limit został już wyczerpany! </br> Przekroczyłeś limit o <strong>${Math.abs(totalLeft)} zł </strong> `);
   }
 }
   
