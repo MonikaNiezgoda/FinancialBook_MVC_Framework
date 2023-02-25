@@ -114,5 +114,12 @@ class UserIncomes extends \Core\Model
         $delete = $db->exec("DELETE FROM incomes WHERE income_category_assigned_to_user_id= '$id'");
     }
 
+    static function newName($id,$newName)
+    {
+        $db = static::getDB();
+		$changeNameCategory = $db ->exec("UPDATE incomes_category_assigned_to_users SET name='$newName'  WHERE id= '$id'");
+    }
+
+
     
 }

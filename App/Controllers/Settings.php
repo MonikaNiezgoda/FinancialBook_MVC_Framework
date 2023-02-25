@@ -70,11 +70,37 @@ class Settings extends Authenticated
     {
         
         $catId=$_POST['edit_expense'];
+        
+
+        if(empty($_POST['new_name']))
+        {
+            $limit=$_POST['limit_category'];
+            UserExpenses::addLimit($catId, $limit);
+        }
+        else if(empty($_POST['limit_category']))
+        {
+            $newName=$_POST['new_name'];
+            UserExpenses::changeName($catId, $newName);
+        }
+        else{
+        $newName=$_POST['new_name'];
         $limit=$_POST['limit_category'];
-        UserExpenses::addLimit($catId, $limit);
-        Flash::addMessage('Dodano limit do kategorii wydatku.');
+        UserExpenses::editExpenseCat($catId, $limit, $newName);
+        }
+      
+        Flash::addMessage('Edycja wydatku zakończona pomyślnie.');
         $this-> redirect('/settings/new');
 
+    }
+
+    public function editIncomeAction()
+    {
+       $catId=$_POST['edit_income'];
+        $newName=$_POST['new_income_name'];
+        UserIncomes::newName($catId, $newName);
+     
+        Flash::addMessage('Edycja przychodu zakończona pomyślnie.');
+        $this-> redirect('/settings/new');
     }
 
 }

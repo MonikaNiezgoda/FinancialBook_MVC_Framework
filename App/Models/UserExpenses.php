@@ -96,9 +96,17 @@ class UserExpenses extends \Core\Model
     public function addCategory($userId)
     {
         $newCat=$_POST['newCategory'];
-		
+        
+        if(empty($_POST['newLimit']))
+        {
+            $newLimit='0';
+        }
+        else{
+            $newLimit=$_POST['newLimit'];
+        }
+  
 		$db = static::getDB();
-		$addExpenseCat = $db ->exec("INSERT INTO expenses_category_assigned_to_users VALUES (NULL , '$userId', '$newCat')");
+		$addExpenseCat = $db ->exec("INSERT INTO expenses_category_assigned_to_users VALUES (NULL , '$userId', '$newCat', '$newLimit')");
     }
 
     static function deleteExpenseCategory($id)
@@ -110,8 +118,18 @@ class UserExpenses extends \Core\Model
     static function addLimit($id, $limit)
     {
 		$db = static::getDB();
-		$deleteIncomeCat = $db ->exec("UPDATE expenses_category_assigned_to_users SET category_limit='$limit'  WHERE id= '$id'");
-        
+		$addLimit = $db ->exec("UPDATE expenses_category_assigned_to_users SET category_limit='$limit'  WHERE id= '$id'");  
+    }
+
+    static function editExpenseCat($id, $limit, $newName)
+    {
+		$db = static::getDB();
+		$editExpense = $db ->exec("UPDATE expenses_category_assigned_to_users (name, category_limit) VALUES ($newName, $limit)   WHERE id= '$id'");     
+    }
+    static function changeName($id, $newName)
+    {
+		$db = static::getDB();
+		$changeNameCategory = $db ->exec("UPDATE expenses_category_assigned_to_users SET name='$newName'  WHERE id= '$id'");  
     }
 
     public static function getCatLimit($id)
