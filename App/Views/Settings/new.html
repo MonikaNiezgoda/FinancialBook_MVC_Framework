@@ -72,12 +72,14 @@
       </div>
     
     <div class="row justify-content-center">
-      <div class="col-8 col-md-6">	
-        <button class="btn btn-warning btn-block mb-2" type="button"   href="#collapseExpenses" aria-expanded="false" data-toggle="collapse">
-          Kategorie wydatków 
+      <div class="col-8 col-md-4">	
+        <button class="btn btn-warning btn-block mb-2 text-left" type="button" data-toggle="collapse" id="collapseExpenses" >
+          Kategorie wydatków    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-compact-down" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M1.553 6.776a.5.5 0 0 1 .67-.223L8 9.44l5.776-2.888a.5.5 0 1 1 .448.894l-6 3a.5.5 0 0 1-.448 0l-6-3a.5.5 0 0 1-.223-.67z"/>
+          </svg>
         </button>
-          <div class="collapse" id="collapseExpenses">
-            <table class="table-sm table-hover categories ">
+          <div class="collapse collapseExp">
+            <table class="table-sm categories ">
               <tbody>
               {% for expense in expenses %}
               <tr><td class="rounded">{{expense.name}}
@@ -103,11 +105,13 @@
       </div>
     </div>
     <div class="row justify-content-center">
-      <div class="col-8 col-md-6">	
-        <button class="btn btn-warning btn-block mb-2" type="button" data-toggle="collapse" data-target="#collapseIncomes" aria-expanded="false" aria-controls="collapseIncomes">
-          Kategorie przychodów 
+      <div class="col-8 col-md-4">	
+        <button class="btn btn-warning btn-block mb-2 text-left type="button" data-toggle="collapse" id="collapseIncomes">
+          Kategorie przychodów <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-compact-down" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M1.553 6.776a.5.5 0 0 1 .67-.223L8 9.44l5.776-2.888a.5.5 0 1 1 .448.894l-6 3a.5.5 0 0 1-.448 0l-6-3a.5.5 0 0 1-.223-.67z"/>
+          </svg>
         </button>
-        <div class="collapse" id="collapseIncomes">
+        <div class="collapse collapseIn">
           <div class="table-responsive">
           <table class= " table-sm table-hover categories ">
             <tbody>
@@ -322,7 +326,7 @@
   });
     const checkbox = document.querySelector('#limitCheck')
     const number = document.querySelector('#limitNumber')
-    checkbox.addEventListener("change", function() {
+checkbox.addEventListener("change", function() {
       if (checkbox.checked) {
         number.removeAttribute("disabled");
       } else {
@@ -330,6 +334,25 @@
       }
     });
 
+$('#collapseExpenses').on('click', function() {
+ $('.collapseExp').collapse('show');
+ toggle: false;
+});
+
+$('#collapseExpenses').on('click', function() {
+ $('.collapseExp').collapse('hide');
+ toggle: false;
+})
+
+$('#collapseIncomes').on('click', function() {
+ $('.collapseIn').collapse('show');
+ toggle: false;
+});
+
+$('#collapseIncomes').on('click', function() {
+ $('.collapseIn').collapse('hide');
+ toggle: false;
+})
 
 </script>
 {% endblock %}

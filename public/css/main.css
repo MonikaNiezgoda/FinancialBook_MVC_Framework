@@ -108,3 +108,15 @@ select:focus
 	margin-bottom: 10px;
 	font-weight: bold !important;
 }
+
+#collapseExpenses {
+	animation: none;
+	transition: none;
+  }
+  
+  #collapseExpenses.show {
+	animation: slide-down 0.3s ease-in-out;
+	transition: none;
+  }
+  
+  
