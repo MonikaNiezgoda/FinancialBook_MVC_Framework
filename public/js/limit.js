@@ -25,18 +25,17 @@ const countLimitLeft = (limit, data) => {
   const newExpense = $("#kwota").val();
   const myAlert = $("#myAlert");
   let totalLeft = limit - newExpense - data;
-  console.log(limit);
-  console.log('test');
+  let roundedTotal = totalLeft.toFixed(2);
     if(limit>0)
     {
       if (totalLeft > 0) {
         myAlert.removeClass("alert-danger").addClass("alert-success");
         myAlert.removeClass("alert-warning").addClass("alert-success");
-        myAlert.html(`<strong>Uwaga!</strong> <br/> Pozostało Ci jeszcze ${totalLeft} zł z limitu w wybranym miesiącu.`);
+        myAlert.html(`<strong>Uwaga!</strong> <br/> Pozostało Ci jeszcze ${roundedTotal} zł z limitu w wybranym miesiącu.`);
       } else if(totalLeft < 0) {
         myAlert.removeClass("alert-success").addClass("alert-danger");
         myAlert.removeClass("alert-warning").addClass("alert-danger");
-        myAlert.html(`<strong>Uwaga!</strong> W wybranym miesiącu limit został już wyczerpany! </br> Przekroczyłeś limit o <strong>${Math.abs(totalLeft)} zł. </strong> `);
+        myAlert.html(`<strong>Uwaga!</strong> W wybranym miesiącu limit został już wyczerpany! </br> Przekroczyłeś limit o <strong>${Math.abs(roundedTotal)} zł. </strong> `);
       }
     }
     else
@@ -56,5 +55,18 @@ $("#kategoria").change(function() {
       countLimitLeft(limit, data);
     });
   });
+});
+
+$("#kwota").change(function (){
+  const kategoria = $("#kategoria").val();
+  if (kategoria && kategoria.trim()) {
+    getMonthExpenses($("#kategoria").val(), $("#data").val())
+  .then(data => {
+    getLimitCategory($("#kategoria").val())
+    .then(limit => {
+      countLimitLeft(limit, data);
+    });
+  });
+  }
 });
 
