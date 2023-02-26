@@ -314,12 +314,16 @@
 </main>
 
 <script>
+
+function getNameFromTd(tdElement) {
+let tdValue = tdElement.innerHTML;
+let plainText = tdValue.replace(/<[^>]+>/g, '');
+return plainText;
+}
   $(".deleteIncomeCat").on('click', function (){
     const tdElement = this.closest('td');
-    const tdValue = tdElement.innerHTML;
-    const plainText = tdValue.replace(/<[^>]+>/g, '');
-    let name = plainText.split(' ')[0];
-    
+    let name = getNameFromTd(tdElement);
+   
     $("#delIncome").html(name);
 
     $('#deleteIncome').modal('show');
@@ -333,9 +337,7 @@
   $(".deleteExpenseCat").on('click', function (){
     
     const tdElement = this.closest('td');
-    const tdValue = tdElement.innerHTML;
-    const plainText = tdValue.replace(/<[^>]+>/g, '');
-    let name = plainText.split(' ')[0];
+    let name = getNameFromTd(tdElement);
     
     $("#delExpense").html(name);
     $('#deleteExpense').modal('show');
@@ -351,7 +353,7 @@
     const tdElement = this.closest('td');
     const tdValue = tdElement.innerHTML;
     const plainText = tdValue.replace(/<[^>]+>/g, '');
-    let name = plainText.split(' ')[0];
+    let name = plainText.split(/Limit:\s*(\d+)/)[0];
     
     let result = plainText.match(/Limit:\s*(\d+)/);
         if (result) {
@@ -373,10 +375,8 @@
   $(".editIncomeCat").on('click', function (){
 
   const tdElementIncome = this.closest('td');
-  const tdValueIncome = tdElementIncome.innerHTML;
-  const plainTextIncome = tdValueIncome.replace(/<[^>]+>/g, '');
-  let text = plainTextIncome.split(' ')[0];
-  $("#editModalIncome").html(text);
+  let name = getNameFromTd(tdElementIncome);
+  $("#editModalIncome").html(name);
 
   const deleteButtonIncome = this.previousElementSibling;
   const incomeId = deleteButtonIncome.getAttribute("value");
