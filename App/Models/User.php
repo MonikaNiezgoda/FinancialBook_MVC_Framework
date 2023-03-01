@@ -93,6 +93,21 @@ class User extends \Core\Model
         }
     }
 
+    public  function validatePassword()
+    {
+        if (strlen($this->newPassword) < 6) {
+           $this-> errors[] = 'Hasło nie może być krótsze niż 6 znaków';
+        }
+
+        if (preg_match('/.*[a-z]+.*/i', $this->newPassword) == 0) {
+            $this-> errors[] = 'Hasło musi zawierać minimum jedną literę';
+        }
+
+        if (preg_match('/.*\d+.*/i', $this->newPassword) == 0) {
+            $this-> errors['e3_pass'] = 'Hasło musi zawierać minimum jedną cyfrę';
+        }
+        else return true;
+    }
     public static function emailExists($email)
     {
         return static::findByEmail($email) !== false;
@@ -160,5 +175,26 @@ class User extends \Core\Model
         return $stmt->execute();
     }
 
+    public function changePassword()
+    {
+        $this->validatePassword();
+
+        if (empty($this->errors))
+        {
+            $id=$this->id;
+            $password_hash = password_hash($this->newPassword, PASSWORD_DEFAULT);
+            $sql = "UPDATE users
+                    SET password = :password_hash
+                    WHERE id = '$id'";
+
+            $db = static::getDB();
+            $stmt = $db->prepare($sql);
+
+            $stmt->bindValue(':password_hash', $password_hash, PDO::PARAM_STR);           
+
+            return $stmt->execute();
+        }
+        else return false;
+    }
    
 }

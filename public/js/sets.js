@@ -121,3 +121,28 @@ function getNameFromTd(tdElement) {
      $('.collapseIn').collapse('hide');
      toggle: false;
     });
+
+    $('#collapseSets').on('click', function() {
+      $('.collapseSet').collapse('show');
+      toggle: false;
+     });
+     
+     $('#collapseSets').on('click', function() {
+      $('.collapseSet').collapse('hide');
+      toggle: false;
+     });
+
+    function checkPasswords(event) {
+  const newPassword = document.getElementById("newPassword").value;
+  const newPassword2 = document.getElementById("newPassword2").value;
+
+  if (newPassword !== newPassword2) {
+    alert("Nowe hasła nie są identyczne");
+  } else {
+    event.target.submit();
+  }
+}
+
+const newPassword2 = document.getElementById("newPassword2");
+newPassword2.addEventListener("blur", checkPasswords);
+   

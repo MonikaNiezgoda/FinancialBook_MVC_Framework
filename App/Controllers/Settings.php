@@ -5,6 +5,7 @@ namespace App\Controllers;
 use \Core\View;
 use \App\Flash;
 use \App\Auth;
+use \App\Models\User;
 use \App\Models\UserIncomes;
 use \App\Models\UserExpenses;
 
@@ -17,10 +18,12 @@ class Settings extends Authenticated
         $expensesCategories = (UserExpenses::findAllExpensesCat($user->id));
         $user = Auth::getUser();
         $incomesCategories = (UserIncomes::findAllIncomesCat($user->id));
+        $user = User::findbyID($user->id);
 
         View::renderTemplate('Settings/new.html',[
             'incomes'=>$incomesCategories,
-            'expenses'=>$expensesCategories
+            'expenses'=>$expensesCategories,
+            'user'=>$user
         ]);
     }
 
@@ -95,13 +98,29 @@ class Settings extends Authenticated
 
     public function editIncomeAction()
     {
-       $catId=$_POST['edit_income'];
+        $catId=$_POST['edit_income'];
         $newName=$_POST['new_income_name'];
         UserIncomes::newName($catId, $newName);
      
         Flash::addMessage('Edycja przychodu zakończona pomyślnie.');
         $this-> redirect('/settings/new');
     }
+
+    public function changePassword()
+{   
+    $user = Auth::getUser();
+    $newPassword = $_POST['new_password'];
+    $user->newPassword = $newPassword;
+    if ($user->changePassword()) {
+        Flash::addMessage('Zmiana hasła zakończona pomyślnie.');
+        $this->redirect('/settings/new');
+    } else {
+        Flash::addMessage('Zmiana hasła zakończona niepomyślnie.',Flash::WARNING);
+        View::renderTemplate('Settings/new.html', [
+            'user' => $user
+        ]);
+    }
+}
 
 }
 

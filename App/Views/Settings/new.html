@@ -72,7 +72,7 @@
       </div>
     
     <div class="row justify-content-center">
-      <div class="col-8 col-md-4">	
+      <div class="col-8 col-md-6 col-lg-4">	
         <button class="btn btn-warning btn-block mb-2 text-left" type="button" data-toggle="collapse" id="collapseExpenses" >
           Kategorie wydatków    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-compact-down" viewBox="0 0 16 16">
             <path fill-rule="evenodd" d="M1.553 6.776a.5.5 0 0 1 .67-.223L8 9.44l5.776-2.888a.5.5 0 1 1 .448.894l-6 3a.5.5 0 0 1-.448 0l-6-3a.5.5 0 0 1-.223-.67z"/>
@@ -105,7 +105,7 @@
       </div>
     </div>
     <div class="row justify-content-center">
-      <div class="col-8 col-md-4">	
+      <div class="col-8 col-md-6 col-lg-4">	
         <button class="btn btn-warning btn-block mb-2 text-left type="button" data-toggle="collapse" id="collapseIncomes">
           Kategorie przychodów <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-compact-down" viewBox="0 0 16 16">
             <path fill-rule="evenodd" d="M1.553 6.776a.5.5 0 0 1 .67-.223L8 9.44l5.776-2.888a.5.5 0 1 1 .448.894l-6 3a.5.5 0 0 1-.448 0l-6-3a.5.5 0 0 1-.223-.67z"/>
@@ -113,7 +113,7 @@
         </button>
         <div class="collapse collapseIn">
           <div class="table-responsive">
-          <table class= " table-sm table-hover categories ">
+          <table class= "table-sm table-hover categories ">
             <tbody>
             {% for income in incomes %}
             <tr><td class="rounded">{{income.name}}
@@ -136,6 +136,31 @@
       </div>
     </div>
   </div>
+  <div class="row justify-content-center">
+    <div class="col-8 col-md-6 col-lg-4">	
+      <button class="btn btn-warning btn-block mb-2 text-left" type="button" data-toggle="collapse" id="collapseSets" >
+        Ustawienia profilu   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-compact-down" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M1.553 6.776a.5.5 0 0 1 .67-.223L8 9.44l5.776-2.888a.5.5 0 1 1 .448.894l-6 3a.5.5 0 0 1-.448 0l-6-3a.5.5 0 0 1-.223-.67z"/>
+        </svg>
+      </button>
+      <div class="collapse collapseSet">
+        <p><strong>Nazwa: {{ current_user.username }} </p> 
+        <p>Email: {{user.email}}</strong>
+        <p> <a data-toggle="modal" href="#modalPassword" role="button">Zmień hasło</a></p>
+      
+     
+      {% if user.errors is not empty %}
+    <p>Nowe hasło nie spełniło następujących wymagań:</p>
+    <ul>
+        {% for error in user.errors %}
+            <li>{{ error }}</li>
+        {% endfor %}
+    </ul>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
 
 <!--Add New Income Category Modal -->
 <div class="modal fade" tabindex="-1" role="dialog" id="addIncomeCat" aria-hidden="true">
@@ -310,7 +335,35 @@
     </div>
   </div>
 </div>
-
+<!--Change Password Modal-->
+<div class="modal" tabindex="-1" role="dialog" id="modalPassword">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <p>Zmiana hasła</p>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body ">
+        <form action="/settings/changePassword" method="POST">
+            <div class="form-group">
+              <label for="newPassword">Nowe hasło:</label>
+              <input type="password"  class="form-control" id="newPassword" name="new_password" required >
+            </div>
+            <div class="form-group">
+              <label for="newPassword2">Powtórz nowe hasło:</label>
+              <input type="password"  class="form-control" id="newPassword2" name="new_password2" required >
+            </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn-sm btn-primary">Zapisz</button>
+        <button type="button" class="btn-sm btn-secondary" data-dismiss="modal">Anuluj</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
 </main>
 
 <script src="/js/sets.js"></script>

@@ -36,6 +36,5 @@ $router->add('api/limit/{id:\d+}', ['controller' => 'Expense', 'action' => 'getL
 
 $router->add('login', ['controller' => 'Login', 'action' => 'new']);
 $router->add('logout', ['controller' => 'Login', 'action' => 'destroy']);
-$router->add('api/incomes', ['controller' => 'Settings', 'action' => 'incomes']);
 $router->add('{controller}/{action}');
 $router->dispatch($_SERVER['QUERY_STRING']);
