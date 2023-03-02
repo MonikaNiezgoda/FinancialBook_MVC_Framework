@@ -70,4 +70,33 @@ $("#kwota").change(function (){
   }
 });
 
+const input = document.getElementById("kwota");
+
+input.addEventListener("input", function() {
+  const value = input.value;
+  const kategoria = $("#kategoria").val();
+  if (kategoria && kategoria.trim()) {
+    getMonthExpenses($("#kategoria").val(), $("#data").val())
+  .then(data => {
+    getLimitCategory($("#kategoria").val())
+    .then(limit => {
+      countLimitLeft(limit, data);
+    });
+  });
+  }
+});
+
+$("#data").change(function (){
+  const kategoria = $("#kategoria").val();
+  if (kategoria && kategoria.trim()) {
+    getMonthExpenses($("#kategoria").val(), $("#data").val())
+  .then(data => {
+    getLimitCategory($("#kategoria").val())
+    .then(limit => {
+      countLimitLeft(limit, data);
+    });
+  });
+  }
+});
+
 
